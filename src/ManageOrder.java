@@ -4,7 +4,6 @@ import java.sql.Statement;
 import javax.swing.*;
 import dao.ConnectionProvider;
 import java.awt.Color;
-import java.lang.classfile.instruction.ConvertInstruction;
 import javax.swing.table.*;
 
 /*
@@ -59,7 +58,6 @@ public class ManageOrder extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         i_cnome = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        i_data = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         i_pprice = new javax.swing.JTextField();
         b_salvar = new javax.swing.JButton();
@@ -72,6 +70,7 @@ public class ManageOrder extends javax.swing.JFrame {
         lbl_aviso = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         i_pqnt1 = new javax.swing.JTextField();
+        i_data = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -165,13 +164,6 @@ public class ManageOrder extends javax.swing.JFrame {
 
         jLabel9.setText("Preço");
 
-        i_data.setToolTipText("DD/MM/AAAA");
-        i_data.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                i_dataActionPerformed(evt);
-            }
-        });
-
         jLabel10.setText("Quantidade vendida");
 
         i_pprice.addActionListener(new java.awt.event.ActionListener() {
@@ -242,6 +234,8 @@ public class ManageOrder extends javax.swing.JFrame {
             }
         });
 
+        i_data.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/mm/yyyy"))));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -288,38 +282,35 @@ public class ManageOrder extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addGap(502, 502, 502)
                             .addComponent(jLabel1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(cb_cn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_aviso, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(i_ctelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(i_cemail, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(65, 65, 65)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(i_pqnt1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(i_pprice, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel10)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(b_addcart)
-                                .addGap(183, 183, 183)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(65, 65, 65)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(b_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(b_sair, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(b_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(67, 67, 67)
-                                .addComponent(i_data, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(i_data, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(40, 40, 40)
+                                    .addComponent(cb_cn)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lbl_aviso, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(35, 35, 35)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(i_ctelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel7)
+                                        .addComponent(i_cemail, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(65, 65, 65)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(i_pqnt1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(i_pprice, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel10)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(b_addcart)
+                                    .addGap(183, 183, 183)))
+                            .addGap(65, 65, 65)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(b_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(b_sair, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(b_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -349,14 +340,10 @@ public class ManageOrder extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(i_data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(b_salvar)
                         .addGap(18, 18, 18)
                         .addComponent(b_reset)
-                        .addGap(18, 18, 18)
-                        .addComponent(b_sair)
-                        .addContainerGap(25, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -378,7 +365,9 @@ public class ManageOrder extends javax.swing.JFrame {
                                 .addGap(6, 6, 6)
                                 .addComponent(jLabel7))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(i_pprice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(i_pprice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(i_data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(6, 6, 6)
                                 .addComponent(jLabel10)))
                         .addGap(6, 6, 6)
@@ -389,9 +378,11 @@ public class ManageOrder extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cb_cn)
                             .addComponent(lbl_aviso))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(b_addcart)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(b_addcart)
+                            .addComponent(b_sair))
+                        .addContainerGap(22, Short.MAX_VALUE))))
         );
 
         pack();
@@ -412,10 +403,6 @@ public class ManageOrder extends javax.swing.JFrame {
     private void i_cnomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_i_cnomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_i_cnomeActionPerformed
-
-    private void i_dataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_i_dataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_i_dataActionPerformed
 
     private void i_ppriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_i_ppriceActionPerformed
         // TODO add your handling code here:
@@ -559,15 +546,15 @@ public class ManageOrder extends javax.swing.JFrame {
         String data = i_data.getText();
         
         try {
-            Connection con = ConnectionProvider.getCon();
-            PreparedStatement ps = con.prepareStatement("insert into sale(client,total,data) values(?,?,?)");
+            Connection con = ConnectionProvider.getCon(); // conexão
+            PreparedStatement ps = con.prepareStatement("insert into sale(client,total,data) values(?,?,?)"); //cria a venda
             ps.setString(1, ncliente);
-            ps.setString(2, total);
+            ps.setString(2, total);     // valores
             ps.setString(3, data);
-            ps.executeUpdate();
+            ps.executeUpdate(); // cria a venda
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select *from sale order by sale_pk limit 1");
-            salePK = Integer.parseInt(rs.getString("sale_pk"));
+            ResultSet rs = st.executeQuery("select *from sale order by sale_pk limit 1"); // procura pela ultima venda criada
+            salePK = Integer.parseInt(rs.getString("sale_pk")); // tira o id da ultima venda criada e transforma salePK nesse valor
         } catch(Exception e ) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -598,7 +585,7 @@ public class ManageOrder extends javax.swing.JFrame {
 
     private void lbl_totalComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_lbl_totalComponentShown
         // TODO add your handling code here:
-        lbl_total.setText(finaltotal);
+        lbl_total.setText(String.valueOf(finaltotal));
     }//GEN-LAST:event_lbl_totalComponentShown
 
     private void i_pqnt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_i_pqnt1ActionPerformed
@@ -649,7 +636,7 @@ public class ManageOrder extends javax.swing.JFrame {
     private javax.swing.JTextField i_cemail;
     private javax.swing.JTextField i_cnome;
     private javax.swing.JTextField i_ctelefone;
-    private javax.swing.JTextField i_data;
+    private javax.swing.JFormattedTextField i_data;
     private javax.swing.JTextField i_pprice;
     private javax.swing.JTextField i_pqnt1;
     private javax.swing.JTextField i_products;
