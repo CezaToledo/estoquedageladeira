@@ -204,6 +204,9 @@ public class ManageClients extends javax.swing.JFrame {
             while(rs.next()) {
                 model.addRow(new Object[] {rs.getString("client_pk"),rs.getString("name"),rs.getString("mobileNumber"),rs.getString("email")});
             }
+            con.close();
+            st.close();
+            rs.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -259,6 +262,8 @@ public class ManageClients extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Cliente adicionado com sucesso");
             setVisible(false);
             new ManageClients().setVisible(true);
+            con.close();
+            ps.close();
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -278,9 +283,10 @@ public class ManageClients extends javax.swing.JFrame {
             ps.setString(3, email);
             ps.setInt(4, clientPK);
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Cliente adicionado com sucesso");
+            JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso");
             setVisible(false);
             new ManageClients().setVisible(true);
+            con.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }

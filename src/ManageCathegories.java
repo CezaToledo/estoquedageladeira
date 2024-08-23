@@ -189,6 +189,8 @@ public class ManageCathegories extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Categoria adicionada com sucesso");
                 setVisible(false);
                 new ManageCathegories().setVisible(true);
+                ps.close();
+                con.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }
@@ -210,6 +212,9 @@ public class ManageCathegories extends javax.swing.JFrame {
             while(rs.next()) {
                 model.addRow(new Object[]{rs.getString("category_pk"),rs.getString("name")});
             }        
+            con.close();
+            st.close();
+            rs.close();
         } 
         catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -247,6 +252,8 @@ public class ManageCathegories extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Categoria atualizada com sucesso");
                 setVisible(false);
                 new ManageCathegories().setVisible(true);
+                con.close();
+                ps.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }

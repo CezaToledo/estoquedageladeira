@@ -157,6 +157,9 @@ public class Login_page extends javax.swing.JFrame /* mostra que é uma página 
             if (temp == 0) {
                 JOptionPane.showMessageDialog(null, "Email ou senha incorretos."); // mostra a notificação de erro quando não achar nenhum login com as informações inseridas
             }
+            con.close();
+            st.close();
+            rs.close();
         } 
         catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);

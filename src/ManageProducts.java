@@ -1,3 +1,4 @@
+
 import java.sql.*;
 import dao.ConnectionProvider;
 import java.lang.reflect.AccessFlag;
@@ -10,17 +11,15 @@ import javax.swing.table.TableModel;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author samuel.toledo
  */
 public class ManageProducts extends javax.swing.JFrame {
 
-    
     private int productPK = 0;
     private int totalQuantity = 0;
-    
+
     /**
      * Creates new form ManageProducts
      */
@@ -28,21 +27,24 @@ public class ManageProducts extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-    
+
     private void getAllCategories() {
         try {
             Connection con = ConnectionProvider.getCon();
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select *from category");
             dd_cat.removeAllItems();
-            while(rs.next()) {
-                dd_cat.addItem(rs.getString("category_pk")+"-"+rs.getString("name"));
+            while (rs.next()) {
+                dd_cat.addItem(rs.getString("category_pk") + "-" + rs.getString("name"));
             }
+            con.close();
+            st.close();
+            rs.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
     private boolean validateFields(String formType) {
         if (formType.equals("edit") && !i_nome.getText().equals("") && !i_desc.getText().equals("") && !i_preço.getText().equals("")) {
             return false;
@@ -269,9 +271,12 @@ public class ManageProducts extends javax.swing.JFrame {
             Connection con = ConnectionProvider.getCon();
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select *from product inner join category on product.category_fk = category.category_pk");
-            while(rs.next()) {
-                model.addRow(new Object[] {rs.getString("product_pk"),rs.getString("name"),rs.getString("quantity"),rs.getString("description"),rs.getString("category_fk"),rs.getString(8),rs.getString("price")});
+            while (rs.next()) {
+                model.addRow(new Object[]{rs.getString("product_pk"), rs.getString("name"), rs.getString("quantity"), rs.getString("description"), rs.getString("category_fk"), rs.getString(8), rs.getString("price")});
             }
+            con.close();
+            st.close();
+            rs.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -328,7 +333,9 @@ public class ManageProducts extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso.");
                 setVisible(false);
                 new ManageProducts().setVisible(true);
-            } catch(Exception e) {
+                con.close();
+                ps.close();
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }
         }
@@ -350,32 +357,36 @@ public class ManageProducts extends javax.swing.JFrame {
         lbl_qnt.setText("Adicionar quantidade");
         i_qnt.setText(quantidade);
         totalQuantity = Integer.parseInt(quantidade);
-        
+
         String preço = model.getValueAt(index, 6).toString();
         i_preço.setText(preço);
 
         String descrição = model.getValueAt(index, 3).toString();
         i_desc.setText(descrição);
-                
+
         dd_cat.removeAllItems();
         String categoryId = model.getValueAt(index, 4).toString();
         String categoryName = model.getValueAt(index, 5).toString();
-        dd_cat.addItem(categoryId +"-"+ categoryName);
-        
+        dd_cat.addItem(categoryId + "-" + categoryName);
+
         try {
             Connection con = ConnectionProvider.getCon();
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select *from category");
             while (rs.next()) {
-                if(Integer.parseInt(categoryId) !=rs.getInt(1)) {
-                    
+                if (Integer.parseInt(categoryId) != rs.getInt(1)) {
+
                 }
                 dd_cat.addItem(rs.getString("category_pk") + "-" + rs.getString("name"));
+
             }
+            con.close();
+            st.close();
+            rs.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-        
+
         b_salvar.setEnabled(false);
         b_atualizar.setEnabled(true);
     }//GEN-LAST:event_tb_produtosMouseClicked
@@ -407,7 +418,9 @@ public class ManageProducts extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso.");
                 setVisible(false);
                 new ManageProducts().setVisible(true);
-            } catch(Exception e) {
+                con.close();
+                ps.close();
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }
         }

@@ -1,3 +1,4 @@
+
 import java.sql.*;
 import java.sql.Statement;
 import javax.swing.*;
@@ -9,12 +10,12 @@ import javax.swing.table.*;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author samuel.toledo
  */
 public class ManageUser extends javax.swing.JFrame {
+
     private int appuserPK = 0;
 
     /**
@@ -24,9 +25,9 @@ public class ManageUser extends javax.swing.JFrame {
         initComponents(); // inicia a GUI
         setLocationRelativeTo(null); // define a localização da janela como a de null(nada), então só recorre ao centro da tela
     }
-    
+
     private boolean validateFields(String formType) {
-        if (formType.equals("edit") && !i_nome.getText().equals("") && !i_email.getText().equals("") && !i_senha.getText().equals("") && !i_telefone.getText().equals("")) {
+        if (formType.equals("edit") && !i_nome.getText().equals("") && !i_email.getText().equals("") && !i_telefone.getText().equals("")) {
             return false;
         } else if (formType.equals("new") && !i_nome.getText().equals("") && !i_email.getText().equals("") && !i_senha.getText().equals("") && !i_telefone.getText().equals("")) {
             return false;
@@ -243,16 +244,19 @@ public class ManageUser extends javax.swing.JFrame {
         // Roda toda vez que a janela for exibida
         DefaultTableModel model = (DefaultTableModel) tb_usuários.getModel();
         try {
-        Connection con = ConnectionProvider.getCon();
-        Statement st = con.createStatement();
-        ResultSet rs = st.executeQuery("select *from appuser where userRole='Admin'");
-        while(rs.next()) {
-            model.addRow(new Object[]{rs.getString("appuser_pk"),rs.getString("name"),rs.getString("mobileNumber"),rs.getString("email"),rs.getString("address"),rs.getString("status")});
-        }
+            Connection con = ConnectionProvider.getCon();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select *from appuser where userRole='Admin'");
+            while (rs.next()) {
+                model.addRow(new Object[]{rs.getString("appuser_pk"), rs.getString("name"), rs.getString("mobileNumber"), rs.getString("email"), rs.getString("address"), rs.getString("status")});
+            }
+            con.close();
+            st.close();
+            rs.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-        
+
         b_atualizar.setEnabled(false);
     }//GEN-LAST:event_formComponentShown
 
@@ -263,8 +267,8 @@ public class ManageUser extends javax.swing.JFrame {
         String email = i_email.getText();
         String endereço = i_endereço.getText();
         String senha = i_senha.getText();
-        String status = (String)dd_status.getSelectedItem();
-        
+        String status = (String) dd_status.getSelectedItem();
+
         if (validateFields("new")) {
             JOptionPane.showMessageDialog(null, "Todos os campos são obrigatórios.");
         } else {
@@ -281,6 +285,8 @@ public class ManageUser extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Usuário adicionado com sucesso.");
                 setVisible(false);
                 new ManageUser().setVisible(true);
+                con.close();
+                ps.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }
@@ -289,15 +295,12 @@ public class ManageUser extends javax.swing.JFrame {
 
     private void b_atualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_atualizarActionPerformed
         // TODO add your handling code here:
-                String nome = i_nome.getText();
+        String nome = i_nome.getText();
         String telefone = i_telefone.getText();
         String email = i_email.getText();
         String endereço = i_endereço.getText();
-        String status = (String)dd_status.getSelectedItem();
-        
-        if (validateFields("new")) {
-            JOptionPane.showMessageDialog(null, "Todos os campos são obrigatórios.");
-        } else {
+        String status = (String) dd_status.getSelectedItem();
+
             try {
                 Connection con = ConnectionProvider.getCon();
                 PreparedStatement ps = con.prepareStatement("update appuser set name=?,mobileNumber=?,email=?,address=?,status=? where appuser_pk=?");
@@ -311,10 +314,11 @@ public class ManageUser extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Usuário atualizado com sucesso.");
                 setVisible(false);
                 new ManageUser().setVisible(true);
+                con.close();
+                ps.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }
-        }
     }//GEN-LAST:event_b_atualizarActionPerformed
 
     private void b_apagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_apagarActionPerformed
@@ -336,35 +340,35 @@ public class ManageUser extends javax.swing.JFrame {
         // TODO add your handling code here:
         int index = tb_usuários.getSelectedRow();
         TableModel model = tb_usuários.getModel();
-        
+
         String id = model.getValueAt(index, 0).toString();
         appuserPK = Integer.parseInt(id);
-        
+
         String name = model.getValueAt(index, 1).toString();
         i_nome.setText(name);
-        
+
         String email = model.getValueAt(index, 2).toString();
         i_email.setText(email);
-        
+
         String mobileNumber = model.getValueAt(index, 3).toString();
         i_telefone.setText(mobileNumber);
-        
+
         String address = model.getValueAt(index, 4).toString();
         i_endereço.setText(address);
-        
+
         String status = model.getValueAt(index, 5).toString();
         dd_status.removeAllItems();
-        if(status.equals("Ativo")) {
+        if (status.equals("Ativo")) {
             dd_status.addItem("Ativo");
             dd_status.addItem("Inativo");
         } else {
             dd_status.addItem("Inativo");
             dd_status.addItem("Ativo");
         }
-        
+
         i_senha.setEditable(false);
         i_senha.setBackground(Color.red);
-        
+
         b_salvar.setEnabled(false);
         b_atualizar.setEnabled(true);
     }//GEN-LAST:event_tb_usuáriosMouseClicked

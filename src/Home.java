@@ -145,6 +145,7 @@ public class Home extends javax.swing.JFrame {
 
     private void b_vpedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vpedidosActionPerformed
         // TODO add your handling code here:
+        new telaLapis().setVisible(true);
     }//GEN-LAST:event_b_vpedidosActionPerformed
 
     /**
