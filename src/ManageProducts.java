@@ -338,6 +338,8 @@ public class ManageProducts extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }
+            setVisible(false);
+            new ManageProducts().setVisible(true);
         }
     }//GEN-LAST:event_b_salvarActionPerformed
 

@@ -45,66 +45,103 @@ public class Home extends javax.swing.JFrame {
         b_logout = new javax.swing.JButton();
         b_pedidos1 = new javax.swing.JButton();
         b_vpedidos = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        b_usuários.setFont(new java.awt.Font("IBM Plex Mono SemiBold", 0, 12)); // NOI18N
         b_usuários.setText("Usuários");
         b_usuários.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b_usuáriosActionPerformed(evt);
             }
         });
-        getContentPane().add(b_usuários, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, -1));
 
+        b_clientes.setFont(new java.awt.Font("IBM Plex Mono SemiBold", 0, 12)); // NOI18N
         b_clientes.setText("Clientes");
         b_clientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b_clientesActionPerformed(evt);
             }
         });
-        getContentPane().add(b_clientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 100, -1));
 
+        b_categorias.setFont(new java.awt.Font("IBM Plex Mono SemiBold", 0, 12)); // NOI18N
         b_categorias.setText("Categorias");
         b_categorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b_categoriasActionPerformed(evt);
             }
         });
-        getContentPane().add(b_categorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 100, -1));
 
+        b_produtos.setFont(new java.awt.Font("IBM Plex Mono SemiBold", 0, 12)); // NOI18N
         b_produtos.setText("Produtos");
         b_produtos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b_produtosActionPerformed(evt);
             }
         });
-        getContentPane().add(b_produtos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 100, -1));
 
+        b_logout.setFont(new java.awt.Font("IBM Plex Mono SemiBold", 0, 12)); // NOI18N
         b_logout.setText("Sair");
         b_logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b_logoutActionPerformed(evt);
             }
         });
-        getContentPane().add(b_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 100, -1));
 
+        b_pedidos1.setFont(new java.awt.Font("IBM Plex Mono SemiBold", 0, 12)); // NOI18N
         b_pedidos1.setText("Vendas");
         b_pedidos1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b_pedidos1ActionPerformed(evt);
             }
         });
-        getContentPane().add(b_pedidos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 100, -1));
 
+        b_vpedidos.setFont(new java.awt.Font("IBM Plex Mono SemiBold", 0, 12)); // NOI18N
         b_vpedidos.setText("Ver vendas");
         b_vpedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b_vpedidosActionPerformed(evt);
             }
         });
-        getContentPane().add(b_vpedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 100, -1));
+
+        jLabel1.setFont(new java.awt.Font("IBM Plex Mono", 1, 18)); // NOI18N
+        jLabel1.setText("Gerenciar");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1)
+            .addComponent(b_usuários, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(b_categorias)
+            .addComponent(b_produtos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(b_clientes, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(b_pedidos1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(b_vpedidos)
+            .addComponent(b_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jLabel1)
+                .addGap(6, 6, 6)
+                .addComponent(b_usuários)
+                .addGap(6, 6, 6)
+                .addComponent(b_categorias)
+                .addGap(6, 6, 6)
+                .addComponent(b_produtos)
+                .addGap(6, 6, 6)
+                .addComponent(b_clientes)
+                .addGap(6, 6, 6)
+                .addComponent(b_pedidos1)
+                .addGap(6, 6, 6)
+                .addComponent(b_vpedidos)
+                .addGap(6, 6, 6)
+                .addComponent(b_logout))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -160,5 +197,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton b_produtos;
     private javax.swing.JButton b_usuários;
     private javax.swing.JButton b_vpedidos;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
