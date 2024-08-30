@@ -49,6 +49,7 @@ public class telaLapis extends javax.swing.JFrame {
             }
         });
 
+        tb_pessoas.setFont(new java.awt.Font("IBM Plex Mono", 0, 12)); // NOI18N
         tb_pessoas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -69,9 +70,10 @@ public class telaLapis extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tb_pessoas);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("IBM Plex Mono", 3, 36)); // NOI18N
         jLabel1.setText("Gerenciar vendas");
 
+        jButton1.setFont(new java.awt.Font("IBM Plex Mono", 1, 12)); // NOI18N
         jButton1.setText("Sair");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,7 +93,7 @@ public class telaLapis extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1))
                     .addComponent(jLabel1))
-                .addContainerGap(342, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

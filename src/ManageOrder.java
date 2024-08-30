@@ -4,6 +4,8 @@ import java.sql.Statement;
 import javax.swing.*;
 import dao.ConnectionProvider;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.security.spec.PSSParameterSpec;
 import javax.swing.table.*;
 
 /*
@@ -40,24 +42,18 @@ public class ManageOrder extends javax.swing.JFrame {
     private void initComponents() {
 
         i_pprice = new javax.swing.JTextField();
+        jFrame1 = new javax.swing.JFrame();
+        jFrame2 = new javax.swing.JFrame();
+        jFrame3 = new javax.swing.JFrame();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_carrinho = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tb_clientes = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tb_products = new javax.swing.JTable();
-        jLabel5 = new javax.swing.JLabel();
         i_products = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        i_cemail = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        i_ctelefone = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        i_cnome = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         b_salvar = new javax.swing.JButton();
@@ -66,7 +62,6 @@ public class ManageOrder extends javax.swing.JFrame {
         b_addcart = new javax.swing.JButton();
         lbl_total = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        cb_cn = new javax.swing.JCheckBox();
         jLabel11 = new javax.swing.JLabel();
         i_pqnt1 = new javax.swing.JTextField();
         i_pprice1 = new javax.swing.JTextField();
@@ -86,14 +81,14 @@ public class ManageOrder extends javax.swing.JFrame {
                 formComponentShown(evt);
             }
         });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("IBM Plex Mono", 3, 36)); // NOI18N
         jLabel1.setText("Registrar vendas");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(502, 30, -1, 52));
-
-        jLabel2.setText("Cliente");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 102, -1, -1));
 
         tb_carrinho.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -110,37 +105,19 @@ public class ManageOrder extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tb_carrinho);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 156, 312, 279));
+        jLabel3.setFont(new java.awt.Font("IBM Plex Mono", 1, 18)); // NOI18N
+        jLabel3.setText("Produtos");
 
-        jLabel3.setText("Produto");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 100, -1, -1));
-
-        tb_clientes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Nome", "Telefone", "Email"
-            }
-        ));
-        tb_clientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tb_clientesMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tb_clientes);
-
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 156, 288, 279));
-
+        jLabel4.setFont(new java.awt.Font("IBM Plex Mono", 1, 18)); // NOI18N
         jLabel4.setText("Carrinho");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1102, 102, -1, -1));
 
+        tb_products.setFont(new java.awt.Font("IBM Plex Mono", 0, 12)); // NOI18N
         tb_products.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nome", "Quantidade", "Descrição", "ID categoria", "Categoria", "Preço"
+                "Código", "Nome", "Quantidade", "Descrição", "ID categoria", "Categoria", "Preço"
             }
         ));
         tb_products.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -155,128 +132,97 @@ public class ManageOrder extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tb_products);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 156, 517, 279));
-
-        jLabel5.setText("Cliente selecionado:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 441, -1, -1));
-
+        i_products.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                i_productsCaretUpdate(evt);
+            }
+        });
+        i_products.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                i_productsCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
         i_products.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 i_productsActionPerformed(evt);
             }
         });
-        getContentPane().add(i_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 463, 517, -1));
-
-        jLabel6.setText("Telefone");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 491, -1, -1));
-
-        i_cemail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                i_cemailActionPerformed(evt);
+        i_products.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                i_productsPropertyChange(evt);
             }
         });
-        getContentPane().add(i_cemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 563, 288, -1));
 
-        jLabel7.setText("Email");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 541, -1, -1));
+        jLabel8.setFont(new java.awt.Font("IBM Plex Mono", 1, 12)); // NOI18N
+        jLabel8.setText("Escaneie o código:");
 
-        i_ctelefone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                i_ctelefoneActionPerformed(evt);
-            }
-        });
-        getContentPane().add(i_ctelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 513, 288, -1));
+        jLabel9.setFont(new java.awt.Font("IBM Plex Mono", 1, 12)); // NOI18N
+        jLabel9.setText("Preço:");
 
-        jLabel8.setText("Produto selecionado:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 441, -1, -1));
+        jLabel10.setFont(new java.awt.Font("IBM Plex Mono", 1, 12)); // NOI18N
+        jLabel10.setText("Quantidade vendida:");
 
-        i_cnome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                i_cnomeActionPerformed(evt);
-            }
-        });
-        getContentPane().add(i_cnome, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 463, 288, -1));
-
-        jLabel9.setText("Preço");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 491, -1, -1));
-
-        jLabel10.setText("Quantidade vendida");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 541, -1, -1));
-
-        b_salvar.setText("Salvar venda");
+        b_salvar.setFont(new java.awt.Font("IBM Plex Mono", 1, 18)); // NOI18N
+        b_salvar.setText("Finalizar Venda");
         b_salvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b_salvarActionPerformed(evt);
             }
         });
-        getContentPane().add(b_salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 540, 312, -1));
 
+        b_reset.setFont(new java.awt.Font("IBM Plex Mono", 1, 12)); // NOI18N
         b_reset.setText("Resetar");
         b_reset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b_resetActionPerformed(evt);
             }
         });
-        getContentPane().add(b_reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 570, 312, -1));
 
+        b_sair.setFont(new java.awt.Font("IBM Plex Mono", 1, 12)); // NOI18N
         b_sair.setText("Sair");
         b_sair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b_sairActionPerformed(evt);
             }
         });
-        getContentPane().add(b_sair, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 600, 312, -1));
 
+        b_addcart.setFont(new java.awt.Font("IBM Plex Mono", 1, 12)); // NOI18N
         b_addcart.setText("Adicionar ao carrinho");
         b_addcart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b_addcartActionPerformed(evt);
             }
         });
-        getContentPane().add(b_addcart, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 636, -1, -1));
 
-        lbl_total.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lbl_total.setFont(new java.awt.Font("IBM Plex Mono", 1, 36)); // NOI18N
         lbl_total.setText("00000");
         lbl_total.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 lbl_totalComponentShown(evt);
             }
         });
-        getContentPane().add(lbl_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(1177, 441, -1, -1));
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel13.setText("TOTAL:  R$");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(972, 441, -1, -1));
-
-        cb_cn.setText("Cliente novo");
-        cb_cn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cb_cnMouseClicked(evt);
-            }
-        });
-        cb_cn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_cnActionPerformed(evt);
-            }
-        });
-        getContentPane().add(cb_cn, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 600, -1, -1));
+        jLabel13.setFont(new java.awt.Font("IBM Plex Mono", 1, 36)); // NOI18N
+        jLabel13.setText("TOTAL:R$");
 
         jLabel11.setText("Data");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(972, 491, -1, -1));
 
+        i_pqnt1.setFont(new java.awt.Font("IBM Plex Mono", 0, 12)); // NOI18N
+        i_pqnt1.setText("1");
         i_pqnt1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 i_pqnt1ActionPerformed(evt);
             }
         });
-        getContentPane().add(i_pqnt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 563, 517, -1));
 
+        i_pprice1.setFont(new java.awt.Font("IBM Plex Mono", 0, 12)); // NOI18N
         i_pprice1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 i_pprice1ActionPerformed(evt);
             }
         });
-        getContentPane().add(i_pprice1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 510, 517, -1));
 
         i_data.setToolTipText("dd/mm/aaaa");
         i_data.addActionListener(new java.awt.event.ActionListener() {
@@ -284,7 +230,108 @@ public class ManageOrder extends javax.swing.JFrame {
                 i_dataActionPerformed(evt);
             }
         });
-        getContentPane().add(i_data, new org.netbeans.lib.awtextra.AbsoluteConstraints(972, 510, 312, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(250, 250, 250)
+                        .addComponent(jLabel3)
+                        .addGap(392, 392, 392)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(i_products, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(53, 53, 53)
+                        .addComponent(jLabel13)
+                        .addGap(24, 24, 24)
+                        .addComponent(lbl_total))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel9)
+                        .addGap(528, 528, 528)
+                        .addComponent(jLabel11))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(i_pprice1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53)
+                        .addComponent(i_data, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(i_pqnt1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(53, 53, 53)
+                        .addComponent(b_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(210, 210, 210)
+                        .addComponent(b_addcart)
+                        .addGap(293, 293, 293)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(b_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(b_sair, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(50, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(3, 3, 3)
+                        .addComponent(i_products, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel13)
+                    .addComponent(lbl_total))
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel11))
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(i_pprice1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(i_data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(3, 3, 3)
+                        .addComponent(i_pqnt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(b_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(b_addcart))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(b_reset)
+                        .addGap(6, 6, 6)
+                        .addComponent(b_sair)))
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -292,18 +339,6 @@ public class ManageOrder extends javax.swing.JFrame {
     private void i_productsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_i_productsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_i_productsActionPerformed
-
-    private void i_cemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_i_cemailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_i_cemailActionPerformed
-
-    private void i_ctelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_i_ctelefoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_i_ctelefoneActionPerformed
-
-    private void i_cnomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_i_cnomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_i_cnomeActionPerformed
 
     private void i_ppriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_i_ppriceActionPerformed
         // TODO add your handling code here:
@@ -317,8 +352,23 @@ public class ManageOrder extends javax.swing.JFrame {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         // esconde o aviso
-
-        DefaultTableModel model3 = (DefaultTableModel) tb_carrinho.getModel();
+        // tabela de produtos
+        DefaultTableModel model2 = (DefaultTableModel) tb_products.getModel();
+        try {
+            Connection con2 = ConnectionProvider.getCon();
+            Statement st2 = con2.createStatement();
+            ResultSet rs2 = st2.executeQuery("select *from product inner join category on product.category_fk = category.category_pk");
+            while (rs2.next()) {
+                model2.addRow(new Object[]{rs2.getString("code"), rs2.getString("name"), rs2.getString("quantity"), rs2.getString("description"), rs2.getString("category_fk"), rs2.getString(9), rs2.getString("price")});
+            }
+            con2.close();
+            st2.close();
+            rs2.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        
+                DefaultTableModel model3 = (DefaultTableModel) tb_carrinho.getModel();
         try {
             Connection con = ConnectionProvider.getCon();
             PreparedStatement st = con.prepareStatement("select *from sale_product where sale_fk = ?");
@@ -333,66 +383,12 @@ public class ManageOrder extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-
-        // tabela de clientes
-        DefaultTableModel model1 = (DefaultTableModel) tb_clientes.getModel();
-        try {
-            Connection con = ConnectionProvider.getCon();
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select *from client");
-            while (rs.next()) {
-                model1.addRow(new Object[]{rs.getString("client_pk"), rs.getString("name"), rs.getString("mobileNumber"), rs.getString("email")});
-            }
-            con.close();
-            st.close();
-            rs.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-
-        // tabela de produtos
-        DefaultTableModel model2 = (DefaultTableModel) tb_products.getModel();
-        try {
-            Connection con2 = ConnectionProvider.getCon();
-            Statement st2 = con2.createStatement();
-            ResultSet rs2 = st2.executeQuery("select *from product inner join category on product.category_fk = category.category_pk");
-            while (rs2.next()) {
-                model2.addRow(new Object[]{rs2.getString("product_pk"), rs2.getString("name"), rs2.getString("quantity"), rs2.getString("description"), rs2.getString("category_fk"), rs2.getString(8), rs2.getString("price")});
-            }
-            con2.close();
-            st2.close();
-            rs2.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
     }//GEN-LAST:event_formComponentShown
 
     private void b_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_sairActionPerformed
         // TODO add your handling code here:
         setVisible(false);
     }//GEN-LAST:event_b_sairActionPerformed
-
-    private void cb_cnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_cnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cb_cnActionPerformed
-
-    private void tb_clientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_clientesMouseClicked
-        // tabela de clientes
-        int indexclient = tb_clientes.getSelectedRow();
-        TableModel model = tb_clientes.getModel();
-
-        String id = model.getValueAt(indexclient, 0).toString();
-        clientPK = Integer.parseInt(id);
-
-        String nome = model.getValueAt(indexclient, 1).toString();
-        i_cnome.setText(nome);
-
-        String telefone = model.getValueAt(indexclient, 2).toString();
-        i_ctelefone.setText(telefone);
-
-        String email = model.getValueAt(indexclient, 3).toString();
-        i_cemail.setText(email);
-    }//GEN-LAST:event_tb_clientesMouseClicked
 
     private void tb_productsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_productsMouseClicked
         // TODO add your handling code here:
@@ -402,8 +398,8 @@ public class ManageOrder extends javax.swing.JFrame {
         String id = model.getValueAt(indexprodutos, 0).toString();
         productPK = Integer.parseInt(id);
 
-        String nome = model.getValueAt(indexprodutos, 1).toString();
-        i_products.setText(nome);
+        String code = model.getValueAt(indexprodutos, 0).toString();
+        i_products.setText(code);
 
         String preço = model.getValueAt(indexprodutos, 6).toString();
         i_pprice1.setText(preço);
@@ -411,17 +407,13 @@ public class ManageOrder extends javax.swing.JFrame {
 
     private void b_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_salvarActionPerformed
         // TODO add your handling code here:
-        String nome = i_cnome.getText();
-        String telefone = i_ctelefone.getText();
-        String email = i_cemail.getText();
         String vdata = i_data.getText();
 
         try {
             Connection con = ConnectionProvider.getCon();
-            PreparedStatement ps = con.prepareStatement("insert into sale(client, total, data) values (?,?,?)");
-            ps.setString(1, nome);
-            ps.setInt(2, finaltotal);
-            ps.setString(3, vdata);
+            PreparedStatement ps = con.prepareStatement("insert into sale(total, data) values (?,?)");
+            ps.setInt(1, finaltotal);
+            ps.setString(2, vdata);
             ps.executeUpdate();
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select *from sale order by sale_pk desc limit 1");
@@ -437,42 +429,16 @@ public class ManageOrder extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-        // checa para criar um cliente novo
-        if (checa == true) {
-            try {
-                Connection con = ConnectionProvider.getCon();
-                PreparedStatement ps = con.prepareStatement("insert into client (name,mobileNumber,email) values(?,?,?)");
-                ps.setString(1, nome);
-                ps.setString(2, telefone);
-                ps.setString(3, email);
-                ps.executeUpdate();
-                con.close();
-                ps.close();
-                setVisible(false);
-                new ManageOrder().setVisible(true);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
-            }
-        } else if (checa == false) {
-
-            setVisible(false);
-            new ManageOrder().setVisible(true);
-        }
+        
+        JOptionPane.showMessageDialog(null, "Venda registrada com sucesso.");
+        
+        setVisible(false);
+        new ManageOrder().setVisible(true);
     }//GEN-LAST:event_b_salvarActionPerformed
-
-    private void cb_cnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cb_cnMouseClicked
-        // TODO add your handling code here:
-        boolean isclicked = true;
-        if (isclicked == true && checa == false) {
-            checa = true;
-        } else if (isclicked == true && checa == true) {
-            checa = false;
-        }
-    }//GEN-LAST:event_cb_cnMouseClicked
 
     private void b_addcartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_addcartActionPerformed
         // coloca o produto no carrinho
-        String pname = i_products.getText();
+        String pcode = i_products.getText();
         Integer pquantidade = Integer.parseInt(i_pqnt1.getText());
         Integer pprice = Integer.parseInt(i_pprice1.getText());
         Integer subtotal = pquantidade * pprice;
@@ -480,8 +446,13 @@ public class ManageOrder extends javax.swing.JFrame {
 
         try {
             Connection con = ConnectionProvider.getCon();
+            PreparedStatement ps1 = con.prepareStatement("select *from product where code=?");
+            ps1.setString(1, pcode);
+            ResultSet rs = ps1.executeQuery();
+            if (rs.next()) {
+            String name = rs.getString("name");
             PreparedStatement ps = con.prepareStatement("insert into sale_product(name, quantity, price, subtotal, sale_fk) values (?,?,?,?,?)");
-            ps.setString(1, pname);
+            ps.setString(1, name);
             ps.setInt(2, pquantidade);
             ps.setInt(3, pprice);
             ps.setString(4, subtotal.toString());
@@ -489,12 +460,14 @@ public class ManageOrder extends javax.swing.JFrame {
             ps.executeUpdate();
             con.close();
             ps.close();
+            ps1.close();
+            rs.close();
+            } else {
+                JOptionPane.showMessageDialog(null, "Produto não encontrado.");
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-
-        tb_carrinho.setVisible(false);
-        tb_carrinho.setVisible(true);
 
         lbl_total.setVisible(false);
         lbl_total.setVisible(true);
@@ -503,6 +476,16 @@ public class ManageOrder extends javax.swing.JFrame {
         tb_products.setVisible(true);
 
         finaltotal = finaltotal + subtotal;
+        
+        setVisible(false);
+        setVisible(true);
+        
+        DefaultTableModel model = (DefaultTableModel) tb_carrinho.getModel();
+        model.setRowCount(0);
+        
+        DefaultTableModel model1 = (DefaultTableModel) tb_products.getModel();
+        model.setRowCount(0);
+        
     }//GEN-LAST:event_b_addcartActionPerformed
 
     private void lbl_totalComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_lbl_totalComponentShown
@@ -516,39 +499,10 @@ public class ManageOrder extends javax.swing.JFrame {
 
     private void tb_productsComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_tb_productsComponentShown
         // TODO add your handling code here:
-        DefaultTableModel model2 = (DefaultTableModel) tb_products.getModel();
-        try {
-            Connection con = ConnectionProvider.getCon();
-            Statement st2 = con.createStatement();
-            ResultSet rs2 = st2.executeQuery("select *from product inner join category on product.category_fk = category.category_pk");
-            while (rs2.next()) {
-                model2.addRow(new Object[]{rs2.getString("product_pk"), rs2.getString("name"), rs2.getString("quantity"), rs2.getString("description"), rs2.getString("category_fk"), rs2.getString(8), rs2.getString("price")});
-            }
-            con.close();
-            rs2.close();
-            st2.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
     }//GEN-LAST:event_tb_productsComponentShown
 
     private void tb_carrinhoComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_tb_carrinhoComponentShown
         // TODO add your handling code here:
-        DefaultTableModel model3 = (DefaultTableModel) tb_carrinho.getModel();
-        try {
-            Connection con = ConnectionProvider.getCon();
-            PreparedStatement st = con.prepareStatement("select *from sale_product where sale_fk = ?");
-            st.setInt(1, salePK);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                model3.addRow(new Object[]{rs.getString("name"), rs.getString("quantity"), rs.getString("price"), rs.getString("subtotal")});
-            }
-            con.close();
-            st.close();
-            rs.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
     }//GEN-LAST:event_tb_carrinhoComponentShown
 
     private void i_pprice1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_i_pprice1ActionPerformed
@@ -558,6 +512,43 @@ public class ManageOrder extends javax.swing.JFrame {
     private void i_dataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_i_dataActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_i_dataActionPerformed
+
+    private void i_productsPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_i_productsPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_i_productsPropertyChange
+
+    private void i_productsCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_i_productsCaretPositionChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_i_productsCaretPositionChanged
+
+    private void i_productsCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_i_productsCaretUpdate
+        // TODO add your handling code here:
+        String nomep = i_products.getText();
+        try {
+            Connection con = ConnectionProvider.getCon();
+            PreparedStatement st = con.prepareStatement("select * from product where code=?");
+            st.setString(1, nomep);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                String peso = rs.getString("price");
+                i_pprice1.setText(peso);
+            } else {
+                i_pprice1.setText("Produto não encontrado");
+            }
+            con.close();
+            st.close();
+            rs.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_i_productsCaretUpdate
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            b_addcart.doClick();
+        }
+    }//GEN-LAST:event_formKeyPressed
 
     /**
      * @param args the command line arguments
@@ -599,33 +590,26 @@ public class ManageOrder extends javax.swing.JFrame {
     private javax.swing.JButton b_reset;
     private javax.swing.JButton b_sair;
     private javax.swing.JButton b_salvar;
-    private javax.swing.JCheckBox cb_cn;
-    private javax.swing.JTextField i_cemail;
-    private javax.swing.JTextField i_cnome;
-    private javax.swing.JTextField i_ctelefone;
     private javax.swing.JTextField i_data;
     private javax.swing.JTextField i_pprice;
     private javax.swing.JTextField i_pprice1;
     private javax.swing.JTextField i_pqnt1;
     private javax.swing.JTextField i_products;
+    private javax.swing.JFrame jFrame1;
+    private javax.swing.JFrame jFrame2;
+    private javax.swing.JFrame jFrame3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lbl_total;
     private javax.swing.JTable tb_carrinho;
-    private javax.swing.JTable tb_clientes;
     private javax.swing.JTable tb_products;
     // End of variables declaration//GEN-END:variables
 }

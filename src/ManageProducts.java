@@ -64,6 +64,7 @@ public class ManageProducts extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_produtos = new javax.swing.JTable();
@@ -82,6 +83,10 @@ public class ManageProducts extends javax.swing.JFrame {
         b_resetare = new javax.swing.JButton();
         b_sair = new javax.swing.JButton();
         b_gcat = new javax.swing.JButton();
+        i_code = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+
+        jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -90,16 +95,19 @@ public class ManageProducts extends javax.swing.JFrame {
                 formComponentShown(evt);
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("IBM Plex Mono", 3, 36)); // NOI18N
         jLabel1.setText("Gerenciar produtos");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, 52));
 
+        tb_produtos.setFont(new java.awt.Font("IBM Plex Mono", 0, 12)); // NOI18N
         tb_produtos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nome", "Quantidade", "Descrição", "ID da categoria", "Categoria", "Preço"
+                "Id", "Nome", "Quantidade", "Descrição", "ID da categoria", "Categoria", "Preço", "Código"
             }
         ));
         tb_produtos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -109,41 +117,60 @@ public class ManageProducts extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tb_produtos);
 
-        jLabel2.setText("Nome");
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 64, 424, 530));
 
+        jLabel2.setFont(new java.awt.Font("IBM Plex Mono", 1, 12)); // NOI18N
+        jLabel2.setText("Nome:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 64, -1, -1));
+
+        i_qnt.setFont(new java.awt.Font("IBM Plex Mono", 0, 12)); // NOI18N
         i_qnt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 i_qntActionPerformed(evt);
             }
         });
+        getContentPane().add(i_qnt, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 136, 432, -1));
 
-        jLabel3.setText("Preço");
+        jLabel3.setFont(new java.awt.Font("IBM Plex Mono", 1, 12)); // NOI18N
+        jLabel3.setText("Preço:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 164, -1, -1));
 
+        i_nome.setFont(new java.awt.Font("IBM Plex Mono", 0, 12)); // NOI18N
         i_nome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 i_nomeActionPerformed(evt);
             }
         });
+        getContentPane().add(i_nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 86, 432, -1));
 
-        lbl_qnt.setText("Quantidade");
+        lbl_qnt.setFont(new java.awt.Font("IBM Plex Mono", 1, 12)); // NOI18N
+        lbl_qnt.setText("Quantidade:");
+        getContentPane().add(lbl_qnt, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 114, -1, -1));
 
+        i_preço.setFont(new java.awt.Font("IBM Plex Mono", 1, 12)); // NOI18N
         i_preço.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 i_preçoActionPerformed(evt);
             }
         });
+        getContentPane().add(i_preço, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 186, 432, -1));
 
+        jLabel5.setFont(new java.awt.Font("IBM Plex Mono", 1, 12)); // NOI18N
         jLabel5.setText("Descrição");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 214, -1, -1));
 
         i_desc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 i_descActionPerformed(evt);
             }
         });
+        getContentPane().add(i_desc, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 236, 432, -1));
 
         jLabel6.setText("Categoria");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 264, -1, -1));
 
         dd_cat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(dd_cat, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 286, 203, 23));
 
         b_salvar.setText("Salvar");
         b_salvar.addActionListener(new java.awt.event.ActionListener() {
@@ -151,6 +178,7 @@ public class ManageProducts extends javax.swing.JFrame {
                 b_salvarActionPerformed(evt);
             }
         });
+        getContentPane().add(b_salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(486, 376, -1, -1));
 
         b_atualizar.setText("Atualizar");
         b_atualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -158,6 +186,7 @@ public class ManageProducts extends javax.swing.JFrame {
                 b_atualizarActionPerformed(evt);
             }
         });
+        getContentPane().add(b_atualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(576, 376, -1, -1));
 
         b_resetare.setText("Resetar");
         b_resetare.addActionListener(new java.awt.event.ActionListener() {
@@ -165,6 +194,7 @@ public class ManageProducts extends javax.swing.JFrame {
                 b_resetareActionPerformed(evt);
             }
         });
+        getContentPane().add(b_resetare, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 376, -1, -1));
 
         b_sair.setText("Sair");
         b_sair.addActionListener(new java.awt.event.ActionListener() {
@@ -172,6 +202,7 @@ public class ManageProducts extends javax.swing.JFrame {
                 b_sairActionPerformed(evt);
             }
         });
+        getContentPane().add(b_sair, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 376, -1, -1));
 
         b_gcat.setText("Gerenciar categorias");
         b_gcat.addActionListener(new java.awt.event.ActionListener() {
@@ -179,85 +210,11 @@ public class ManageProducts extends javax.swing.JFrame {
                 b_gcatActionPerformed(evt);
             }
         });
+        getContentPane().add(b_gcat, new org.netbeans.lib.awtextra.AbsoluteConstraints(645, 286, 223, -1));
+        getContentPane().add(i_code, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 336, 432, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(i_preço)
-                            .addComponent(i_nome)
-                            .addComponent(i_qnt)
-                            .addComponent(i_desc)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(dd_cat, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(b_gcat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(lbl_qnt)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(20, 20, 20)
-                                        .addComponent(b_salvar)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(b_atualizar)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(b_resetare)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(b_sair)))
-                                .addGap(0, 33, Short.MAX_VALUE)))))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(i_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_qnt)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(i_qnt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(i_preço, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(i_desc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(b_gcat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(dd_cat))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(b_salvar)
-                            .addComponent(b_atualizar)
-                            .addComponent(b_resetare)
-                            .addComponent(b_sair))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
+        jLabel7.setText("Código");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 315, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -272,7 +229,7 @@ public class ManageProducts extends javax.swing.JFrame {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select *from product inner join category on product.category_fk = category.category_pk");
             while (rs.next()) {
-                model.addRow(new Object[]{rs.getString("product_pk"), rs.getString("name"), rs.getString("quantity"), rs.getString("description"), rs.getString("category_fk"), rs.getString(8), rs.getString("price")});
+                model.addRow(new Object[]{rs.getString("product_pk"), rs.getString("name"), rs.getString("quantity"), rs.getString("description"), rs.getString("category_fk"), rs.getString(8), rs.getString("price"),rs.getString("code")});
             }
             con.close();
             st.close();
@@ -318,17 +275,19 @@ public class ManageProducts extends javax.swing.JFrame {
         String price = i_preço.getText();
         String category = (String) dd_cat.getSelectedItem();
         String categoryId[] = category.split("-", 0);
+        String código = i_code.getText();
         if (validateFields("new")) {
             JOptionPane.showMessageDialog(null, "Todos os campos são necessários.");
         } else {
             try {
                 Connection con = ConnectionProvider.getCon();
-                PreparedStatement ps = con.prepareStatement("insert into product(name,quantity,price,description,category_fk) values(?,?,?,?,?)");
+                PreparedStatement ps = con.prepareStatement("insert into product(name,quantity,price,description,category_fk, code) values(?,?,?,?,?,?)");
                 ps.setString(1, name);
                 ps.setString(2, quantity);
                 ps.setString(3, price);
                 ps.setString(4, description);
                 ps.setString(5, categoryId[0]);
+                ps.setString(6, código);
                 ps.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso.");
                 setVisible(false);
@@ -365,11 +324,15 @@ public class ManageProducts extends javax.swing.JFrame {
 
         String descrição = model.getValueAt(index, 3).toString();
         i_desc.setText(descrição);
+        
+        String Código = model.getValueAt(index, 7).toString();
+        i_code.setText(Código);
 
         dd_cat.removeAllItems();
         String categoryId = model.getValueAt(index, 4).toString();
         String categoryName = model.getValueAt(index, 5).toString();
         dd_cat.addItem(categoryId + "-" + categoryName);
+        
 
         try {
             Connection con = ConnectionProvider.getCon();
@@ -401,6 +364,7 @@ public class ManageProducts extends javax.swing.JFrame {
         String price = i_preço.getText();
         String category = (String) dd_cat.getSelectedItem();
         String categoryId[] = category.split("-", 0);
+        String código = i_code.getText();
         if (validateFields("edit")) {
             JOptionPane.showMessageDialog(null, "Todos os campos são necessários.");
         } else {
@@ -409,13 +373,14 @@ public class ManageProducts extends javax.swing.JFrame {
                     totalQuantity = totalQuantity + Integer.parseInt(quantity);
                 }
                 Connection con = ConnectionProvider.getCon();
-                PreparedStatement ps = con.prepareStatement("update product set name=?, quantity=?, price=?, description=?, category_fk=? where product_pk=?");
+                PreparedStatement ps = con.prepareStatement("update product set name=?, quantity=?, price=?, description=?, category_fk=?, code=? where product_pk=?");
                 ps.setString(1, name);
                 ps.setInt(2, totalQuantity);
                 ps.setString(3, price);
                 ps.setString(4, description);
                 ps.setString(5, categoryId[0]);
-                ps.setInt(6, productPK);
+                ps.setString(6, código);
+                ps.setInt(7, productPK);
                 ps.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso.");
                 setVisible(false);
@@ -475,6 +440,7 @@ public class ManageProducts extends javax.swing.JFrame {
     private javax.swing.JButton b_sair;
     private javax.swing.JButton b_salvar;
     private javax.swing.JComboBox<String> dd_cat;
+    private javax.swing.JTextField i_code;
     private javax.swing.JTextField i_desc;
     private javax.swing.JTextField i_nome;
     private javax.swing.JTextField i_preço;
@@ -484,7 +450,9 @@ public class ManageProducts extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbl_qnt;
     private javax.swing.JTable tb_produtos;
     // End of variables declaration//GEN-END:variables
